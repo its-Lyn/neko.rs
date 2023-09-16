@@ -21,19 +21,18 @@ impl NekoConsole {
 
         if config.use_colours {
             println!("{}", format!("{} results found!", packages.result_count).green());
-
             if packages.result_count > config.pkg_limit {
                 println!("{}", format!("Package limit exceeded! Only showing {} results.\n", config.pkg_limit).bright_red());
+            } else {
+                print!("\n");
             }
-
-            print!("\n");
-        }
-
-        println!("{} results found!", packages.result_count);
-        if packages.result_count > config.pkg_limit {
-            println!("Package limit exceeded! Only showing {} results.\n", config.pkg_limit);
         } else {
-            print!("\n");
+            println!("{} results found!", packages.result_count);
+            if packages.result_count > config.pkg_limit {
+                println!("Package limit exceeded! Only showing {} results.\n", config.pkg_limit);
+            } else {
+                print!("\n");
+            }
         }
 
         let mut shown: i32 = 0;
@@ -68,6 +67,7 @@ impl NekoConsole {
             }
 
             print!("\n");
+
             shown += 1;
         }
     }
