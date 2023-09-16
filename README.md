@@ -3,7 +3,7 @@ The pretty and easy to use AUR searcher.
 
 ### Usage:
 ```bash
-neko <package_name>
+neko <command>
 ```
 
 ### Configuration:
@@ -34,7 +34,7 @@ cd neko.rs
 cargo build --release
 
 cd ./target/release
-./neko
+./neko -h
 ```
 
 ### Add neko to your PATH.
