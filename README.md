@@ -38,7 +38,7 @@ cd ./target/release
 ./neko
 ```
 
-Now that you have the files installed. It's time to move them to your PATH.
+### Add neko to your PATH.
 
 ```bash
 # For fish users
