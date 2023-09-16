@@ -7,7 +7,7 @@ neko <package_name>
 ```
 
 ### Configuration:
-Open the Config/Config.xml file in your favourite text editor!
+Open the ~/.config/neko/config.xml file in your favourite text editor!
 - PkgLimit - int
 - UseColour - bool
 - ShowID - bool
@@ -32,7 +32,6 @@ git clone https://github.com/its-Lyn/neko.rs
 cd neko.rs
 
 cargo build --release
-cp -r ./config ./target/release
 
 cd ./target/release
 ./neko
