@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NekoConfig>
+    <pkg_limit>200</pkg_limit>
+
+    <use_colours>true</use_colours>
+
+    <show_id>false</show_id>
+    <show_version>true</show_version>
+    <show_maintainer>false</show_maintainer>
+    <show_votes>true</show_votes>
+</NekoConfig>
