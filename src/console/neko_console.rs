@@ -27,13 +27,13 @@ impl NekoConsole {
             }
 
             print!("\n");
-        }
-
-        println!("{} results found!", packages.result_count);
-        if packages.result_count > config.pkg_limit {
-            println!("Package limit exceeded! Only showing {} results.\n", config.pkg_limit);
         } else {
-            print!("\n");
+             println!("{} results found!", packages.result_count);
+            if packages.result_count > config.pkg_limit {
+                println!("Package limit exceeded! Only showing {} results.\n", config.pkg_limit);
+            } else {
+                print!("\n");
+            }   
         }
 
         let mut shown: i32 = 0;
