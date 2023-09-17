@@ -1,9 +1,15 @@
 use std::io;
 use std::io::Write;
 use std::process::{Command, Stdio};
+use crate::client::get_aur_packages::get_aur_packages;
 
-pub fn download(package: &str) {
-    let aur_url: String = format!("https://aur.archlinux.org/{}.git", package);
+pub async fn download(package: &str) {
+    let remote_aur_url: String = format!("https://aur.archlinux.org/{}.git", package);
+
+    if get_aur_packages(package).await.result_count < 1 {
+        println!("No packages found by that name!");
+        return;
+    }
 
     print!("You're about to download {}. Is this correct? (y/n) ", package);
     io::stdout().flush().expect("Error flushing stdout");
@@ -16,7 +22,7 @@ pub fn download(package: &str) {
     }
 
     let git_command = Command::new("git")
-        .args(["clone", aur_url.as_str()])
+        .args(["clone", remote_aur_url.as_str()])
         .current_dir("/tmp/")
         .stdout(Stdio::inherit())
         .status()

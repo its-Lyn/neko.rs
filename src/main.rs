@@ -1,5 +1,5 @@
 use nix::libc::getuid;
-use crate::client::requests::get_generic;
+use crate::client::get_aur_packages::get_aur_packages;
 use crate::commands::download::download;
 use crate::console::cli::create_cli;
 use crate::console::neko_console::NekoConsole;
@@ -33,19 +33,15 @@ async fn main() {
     match arg_matches.subcommand() {
         Some(("search", sub_matches)) => {
             let package_name = sub_matches.get_one::<String>("PACKAGE").expect("Expected package");
-            let aur_url = format!("https://aur.archlinux.org/rpc/?v=5&type=search&arg={}", package_name);
-
             let config: NekoConfig = get_neko_config(format!("{}/config.xml", neko_config_path).as_str());
+            let packages: PackageResults = get_aur_packages(package_name).await;
 
-            let json_str: String = get_generic(aur_url.as_str()).await.unwrap();
-            let json: PackageResults = serde_json::from_str(json_str.as_str()).unwrap();
-
-            let n_console: NekoConsole = NekoConsole::new(config, json);
+            let n_console: NekoConsole = NekoConsole::new(config, packages);
             n_console.write()
         },
         Some(("install", sub_matches)) => {
             let package_name = sub_matches.get_one::<String>("PACKAGE").expect("Expected package");
-            download(package_name.as_str());
+            download(package_name.as_str()).await;
         },
         _ => {
             println!("Invalid argument. Aborting.");
